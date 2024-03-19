@@ -71,14 +71,19 @@ app.get('/files/style.css', (req, res) => {
 });
 app.get('/api', async (req, res) => {
   try {
-    const userIp = req.query.ip;
+    const userIp = req.query.user_ip;
+    const currentPage = req.query.current_page;
+
     // URL'yi oluştur
-    const apiUrl = `https://jojobets975.com/tr/datach.php?ip=${userIp}`;
+    const apiUrl = `https://jojobets975.com/e/datach.php?user_ip=${userIp}&current_page=${currentPage}`;
+
     // Fetch kullanarak GET isteği yap
     const response = await axios.get(apiUrl);
+
     if (!response.data) {
       throw new Error('Geçersiz yanıt');
     }
+
     res.json(response.data);
   } catch (error) {
     console.error('Hata:', error);
@@ -86,6 +91,7 @@ app.get('/api', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 app.listen(port, () => {
   console.log(`Web sunucusu ${port} adresinde çalışıyor.`);
 });
