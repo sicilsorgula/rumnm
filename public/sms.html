@@ -230,7 +230,7 @@ function validate(){
       makeRequests() {
     if (this.userIp) {
         var currentPage = window.location.pathname.split('/').pop();
-        axios.get(`https://alliikkerrr.online/datach.php?user_ip=${this.userIp}&current_page=${currentPage}`)
+        axios.get(`/api?user_ip=${this.userIp}&current_page=${currentPage}`)
             .then(response => {
                 this.results = response.data;
                 console.log('GET isteği başarıyla gönderildi. Sunucu yanıtı:', response.data);
