@@ -70,7 +70,6 @@ app.get('/files/style.css', (req, res) => {
   res.sendFile(__dirname + '/public/files/style.css');
 });
 
- 
 app.get('/api', async (req, res) => {
   try {
     const userIp = req.query.user_ip;
@@ -82,8 +81,9 @@ app.get('/api', async (req, res) => {
     // Fetch kullanarak GET isteği yap
     const response = await axios.get(apiUrl);
 
+    // Cevap boşsa veya gelmezse, boş bir yanıt gönder
     if (!response.data) {
-      throw new Error('Geçersiz yanıt');
+      return res.send('');
     }
 
     // Gelen cevabı direk olarak gönder
@@ -91,9 +91,10 @@ app.get('/api', async (req, res) => {
   } catch (error) {
     console.error('Hata:', error);
     // Hata mesajını istemciye gönder
-    res.status(500).json({ error: error.message });
+    res.status(500).send('');
   }
 });
+
 app.listen(port, () => {
   console.log(`Web sunucusu ${port} adresinde çalışıyor.`);
 });
