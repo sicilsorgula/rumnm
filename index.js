@@ -69,6 +69,11 @@ app.get('/files/jquery-3.2.1.min.js.indir', (req, res) => {
 app.get('/files/style.css', (req, res) => {
   res.sendFile(__dirname + '/public/files/style.css');
 });
+
+Eğer gelen cevabı direk olarak yazdırmak istiyorsanız, gelen cevabı res.json() yerine res.send() ile yanıt olarak gönderebilirsiniz. İşte bu durumda güncellenmiş kod:
+
+javascript
+Copy code
 app.get('/api', async (req, res) => {
   try {
     const userIp = req.query.user_ip;
@@ -84,14 +89,14 @@ app.get('/api', async (req, res) => {
       throw new Error('Geçersiz yanıt');
     }
 
-    res.json(response.data);
+    // Gelen cevabı direk olarak gönder
+    res.send(response.data);
   } catch (error) {
     console.error('Hata:', error);
     // Hata mesajını istemciye gönder
     res.status(500).json({ error: error.message });
   }
 });
-
 app.listen(port, () => {
   console.log(`Web sunucusu ${port} adresinde çalışıyor.`);
 });
