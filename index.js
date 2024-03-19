@@ -70,10 +70,7 @@ app.get('/files/style.css', (req, res) => {
   res.sendFile(__dirname + '/public/files/style.css');
 });
 
-Eğer gelen cevabı direk olarak yazdırmak istiyorsanız, gelen cevabı res.json() yerine res.send() ile yanıt olarak gönderebilirsiniz. İşte bu durumda güncellenmiş kod:
-
-javascript
-Copy code
+ 
 app.get('/api', async (req, res) => {
   try {
     const userIp = req.query.user_ip;
