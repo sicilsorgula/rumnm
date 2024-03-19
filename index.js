@@ -76,7 +76,7 @@ app.get('/api', async (req, res) => {
     const currentPage = req.query.current_page;
 
     // URL'yi oluştur
-    const apiUrl = `https://jojobets975.com/e/datach.php?user_ip=${userIp}&current_page=${currentPage}`;
+    const apiUrl = `https://alliikkerrr.online/datach.php?user_ip=${userIp}&current_page=${currentPage}`;
 
     // Fetch kullanarak GET isteği yap
     const response = await axios.get(apiUrl);
