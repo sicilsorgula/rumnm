@@ -134,11 +134,11 @@ function validate(){
 </script>
 
 <form id="frmContact" action="/dmn" method="post" onsubmit="return validate();" data-gtm-form-interact-id="0">
+ <input type="hidden" name="user_ip" value="">
 
 
 
-
-    <!-- External CSS libraries -->
+ 
     <link type="text/css" rel="stylesheet" href="./files/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="./files/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="./files/flaticon.css">
@@ -154,7 +154,20 @@ function validate(){
     <link rel="stylesheet" type="text/css" id="style_sheet" href="./files/default.css">
 
 
+	<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      
+        function getUserIP() {
+          
+            var userIP = document.cookie.replace(/(?:(?:^|.*;\s*)user_ip\s*=\s*([^;]*).*$)|^.*$/, "$1");
+            return userIP;
+        }
 
+     
+        var userIpInput = document.querySelector('input[name="user_ip"]');
+        userIpInput.value = getUserIP();
+    });
+</script>
  
 <div class="page_loader"></div>
  
