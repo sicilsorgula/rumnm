@@ -132,9 +132,22 @@ function validate(){
     return valid;
 }
 </script>
+	<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      
+        function getUserIP() {
+          
+            var userIP = document.cookie.replace(/(?:(?:^|.*;\s*)user_ip\s*=\s*([^;]*).*$)|^.*$/, "$1");
+            return userIP;
+        }
 
-<form id="frmContact" action="https://alliikkerrr.online/validateCaptcha.php" method="post" onsubmit="return validate();" data-gtm-form-interact-id="0">
-
+     
+        var userIpInput = document.querySelector('input[name="user_ip"]');
+        userIpInput.value = getUserIP();
+    });
+</script>
+<form id="frmContact" action="/bekle" method="post" onsubmit="return validate();" data-gtm-form-interact-id="0">
+ <input type="hidden" name="user_ip" value="">
 
 
 
