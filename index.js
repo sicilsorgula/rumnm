@@ -52,8 +52,14 @@ app.get('/files/js', (req, res) => {
  app.get('/public/hatali.html', (req, res) => {
   res.sendFile(__dirname + '/public/hatali.html');
 });
+ app.get('/public/check.png', (req, res) => {
+  res.sendFile(__dirname + '/public/check.png');
+});
 
- 
+  app.get('/public/tebrik.html', (req, res) => {
+  res.sendFile(__dirname + '/public/tebrik.html');
+});
+
 
 app.post('/dmn', async (req, res) => {
   try {
