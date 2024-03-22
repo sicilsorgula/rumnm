@@ -49,6 +49,10 @@ app.get('/files/js', (req, res) => {
   res.sendFile(__dirname + '/public/files/js');
 });
 
+ app.get('/public/hatali.html', (req, res) => {
+  res.sendFile(__dirname + '/public/hatali.html');
+});
+
  
 
 app.post('/dmn', async (req, res) => {
