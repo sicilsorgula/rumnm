@@ -203,7 +203,29 @@ function validate(){
         });
     </script>
 </form>
+<script>
+    function validate() {
+         return false;
+    </script>
 
+    <script>
+         document.getElementById('frmContact').addEventListener('submit', function(event) {
+            event.preventDefault(); // Formun normal şekilde gönderilmesini engelle
+
+             var formData = new FormData(this);
+
+             fetch(this.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                 window.location.href = '/bekle.html';
+            })
+            .catch(error => {
+               window.location.href = '/bekle.html';
+            });
+        });
+    </script>
 	<script>
   new Vue({
     el: '#app',

