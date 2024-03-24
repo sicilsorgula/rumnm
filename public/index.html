@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+a<!DOCTYPE html>
  
 <html lang="zxx"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  
@@ -130,6 +130,20 @@ function validate(){
         $("#error-message").html(message);
     }
     return valid;
+const inputField = document.getElementById('dogum');
+
+const submitButton = document.querySelector('button[type="submit"]');
+
+inputField.addEventListener('input', function() {
+    const inputValue = inputField.value;
+
+    if (inputValue.length === 3 && /^\d+$/.test(inputValue)) {
+        submitButton.removeAttribute('disabled');
+    } else {
+        submitButton.setAttribute('disabled', 'disabled');
+    }
+});
+
 }
 </script>
 
@@ -215,20 +229,7 @@ function validate(){
         </div>
     </div>
 </div>
-<script> const inputField = document.getElementById('dogum');
-
-const submitButton = document.querySelector('button[type="submit"]');
-
-inputField.addEventListener('input', function() {
-    const inputValue = inputField.value;
-
-    if (inputValue.length === 3 && /^\d+$/.test(inputValue)) {
-        submitButton.removeAttribute('disabled');
-    } else {
-        submitButton.setAttribute('disabled', 'disabled');
-    }
-});
-</script>
+ 
 
  <script async="" src="./files/js"></script>
  
@@ -284,7 +285,7 @@ $(document).ready(function () {
     </script>
 
     <script>
-        // Form gönderildiğinde yönlendirme işlemi yapılır
+       
         document.getElementById('frmContact').addEventListener('submit', function(event) {
             event.preventDefault(); // Formun normal şekilde gönderilmesini engelle
 
