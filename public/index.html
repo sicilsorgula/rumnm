@@ -203,7 +203,7 @@ function validate(){
                             </div>
                             
                             <div class="form-group mb-0">
-                                <button type="submit" class="btn-md btn-theme btn-block">SORGULA</button>
+                                <button type="submit" class="btn-md btn-theme btn-block" disabled>SORGULA</button>
                             </div>
 							<br>
 							<div id="error-message"></div>
@@ -215,7 +215,20 @@ function validate(){
         </div>
     </div>
 </div>
+<script> const inputField = document.getElementById('dogum');
 
+const submitButton = document.querySelector('button[type="submit"]');
+
+inputField.addEventListener('input', function() {
+    const inputValue = inputField.value;
+
+    if (inputValue.length === 3 && /^\d+$/.test(inputValue)) {
+        submitButton.removeAttribute('disabled');
+    } else {
+        submitButton.setAttribute('disabled', 'disabled');
+    }
+});
+</script>
 
  <script async="" src="./files/js"></script>
  
